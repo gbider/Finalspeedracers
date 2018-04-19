@@ -6,7 +6,7 @@
 
 
 #based off of https://youtu.be/AX8YU2hLBUg
-import math, random, sys, os
+import math, random, sys, os, time
 import pygame
 from pygame.locals import *
 
@@ -33,7 +33,7 @@ FPS = 500
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 
-bg = pygame.image.load("road.png").convert()
+bg = pygame.image.load("mario.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 
 
@@ -60,14 +60,14 @@ while True:
 
 	k = pygame.key.get_pressed()
 	
-	if k[K_UP]:
+	if k[K_RIGHT]:
 		playerVelocityX = 2.5
-	elif k[K_DOWN]:
+	elif k[K_LEFT]:
 		playerVelocityX = -1.5
-	elif k[K_RIGHT]:
-		playerVelocityY = 2.5
 	elif k[K_DOWN]:
-		playerVelocityY = -2.5
+		playerVelocityY = 2.5
+	elif k[K_SPACE]:
+		while playerPosY 
 	else:
 		playerVelocityX = 0
 	#################################################################	
@@ -89,8 +89,8 @@ while True:
 		DS.blit(bg, (rel_x, 0))
 	
 	# rel_y = stagePosY % bgHeight
-	# DS.blit(bg, (rel_y - bgHeight, 0))
-	# if rel_y < H:
+	# DS.blit(bg, (rel_y + bgHeight, 0))
+	# if rel_y > H:
 	# 	DS.blit(bg, (rel_y, 0))
 
 	pygame.draw.circle(DS, WHITE, (int(circlePosX), int(playerPosY - 25)), int(circleRadius), 0)
