@@ -67,7 +67,13 @@ while True:
 	elif k[K_DOWN]:
 		playerVelocityY = 2.5
 	elif k[K_SPACE]:
-		while playerPosY 
+		print(playerPosY)
+		while playerPosY <= 360:
+			playerVelocityY = -2.5
+		while playerPosY >= 380:
+			playerVelocityY = 2.	
+		# while playerPosY < 360:
+		# 	playerVelocityY = 0
 	else:
 		playerVelocityX = 0
 	#################################################################	
