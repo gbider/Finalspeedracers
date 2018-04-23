@@ -36,19 +36,22 @@ WHITE = (255, 255, 255, 255)
 bg = pygame.image.load("mario.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 
-
+#creating stage
 stageWidth = bgWidth * 2
 stagePosX = 0
 
 stageHeight = bgHeight * 2
 stagePosY = 0
 
+#set cords
 startScrollingPosX = HW
 startScrollingPosY = HH
 
+#circle stats
 circleRadius = 25
 circlePosX = circleRadius
 
+#starting place
 playerPosX = circleRadius
 playerPosY = 600
 playerVelocityX = 0
@@ -59,21 +62,26 @@ playerVelocityY = 0
 time = 0
 
 while True:
+	#check if close game
 	events()
+	#short hand to call key presses
 	k = pygame.key.get_pressed()
 	
 	if k[K_RIGHT]:
-		shouldIRun = True
+		#MOVE RIGHT
+		#shouldIRun = True
 		#jump = True
 		playerVelocityX = 2.5
 	elif k[K_LEFT]:
-		shouldIRun = True
+		#MOVE LEFT
+		#shouldIRun = True
 		#jump = True
 		playerVelocityX = -2.5
 	# elif k[K_DOWN]:
 	# 	playerVelocityY = 2.5
 	# 	print(playerPosY) 
 	elif k[K_SPACE]:
+		#JUMP
 		if playerPosY <= 610:
 			#print("yo playerPos Y equal to 360")
 			playerVelocityY = -2.5
@@ -91,7 +99,7 @@ while True:
 	else:
 		playerVelocityX = 0
 
-	#max cords
+	#max cords to limit and control jumping
 	if playerPosY <= 500:
 		playerVelocityY = 2.5
 	if playerPosY > 610:
@@ -105,11 +113,13 @@ while True:
 	stagePosX += -playerVelocityX
 
 	#should move player on Y axis
+	#dont do nothing
 	playerPosY += playerVelocityY
 
 	circlePosY = startScrollingPosY
 	stagePosY += -playerVelocityY
 	###############################################################
+	#moves x cord of screen
 	rel_x = stagePosX % bgWidth
 	DS.blit(bg, (rel_x - bgWidth, 0))
 	if rel_x < W:
@@ -120,8 +130,11 @@ while True:
 	# if rel_y > H:
 	# 	DS.blit(bg, (rel_y, 0))
 
+
+	#draw circle
 	pygame.draw.circle(DS, WHITE, (int(circlePosX), int(playerPosY - 25)), int(circleRadius), 0)
 
+	#update screen
 	pygame.display.update()
 	CLOCK.tick(FPS)
 	DS.fill(BLACK)
