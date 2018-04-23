@@ -53,26 +53,44 @@ playerPosX = circleRadius
 playerPosY = 360
 playerVelocityX = 0
 playerVelocityY = 0
+###################
 
 # main loop
+time = 0
+shouldIRun = True
 while True:
 	events()
-
 	k = pygame.key.get_pressed()
 	
 	if k[K_RIGHT]:
+		shouldIRun = True
+		#jump = True
 		playerVelocityX = 2.5
 	elif k[K_LEFT]:
+		shouldIRun = True
+		#jump = True
 		playerVelocityX = -1.5
-	elif k[K_DOWN]:
-		playerVelocityY = 2.5
+	# elif k[K_DOWN]:
+	# 	playerVelocityY = 2.5
+	# 	print(playerPosY) 
 	elif k[K_SPACE]:
-		print(playerPosY)
-		while playerPosY <= 360:
-			playerVelocityY = -2.5
-		while playerPosY >= 380:
-			playerVelocityY = 2.	
-		# while playerPosY < 360:
+		if shouldIRun == True:
+			print("running" + str(time))
+			time += 1
+			if playerPosY == 360:
+				print("yo playerPos Y equal to 360")
+				playerVelocityY = -2.5
+			if playerPosY <= 250:
+				print("playerposy is <= 250")
+				playerVelocityY = 2.5
+			if playerPosY > 360:
+				print("stopping")
+				playerVelocityY = 0
+				shouldIRun = False
+				jump = False
+				playerPosY = 360
+			# else:
+		# 	print("yo im prob screwing up the code")
 		# 	playerVelocityY = 0
 	else:
 		playerVelocityX = 0
