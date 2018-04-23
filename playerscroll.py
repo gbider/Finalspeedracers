@@ -50,7 +50,7 @@ circleRadius = 25
 circlePosX = circleRadius
 
 playerPosX = circleRadius
-playerPosY = 360
+playerPosY = 600
 playerVelocityX = 0
 playerVelocityY = 0
 ###################
@@ -69,13 +69,13 @@ while True:
 	elif k[K_LEFT]:
 		shouldIRun = True
 		#jump = True
-		playerVelocityX = -1.5
+		playerVelocityX = -2.5
 	# elif k[K_DOWN]:
 	# 	playerVelocityY = 2.5
 	# 	print(playerPosY) 
 	elif k[K_SPACE]:
-		if playerPosY <= 360:
-			print("yo playerPos Y equal to 360")
+		if playerPosY <= 610:
+			#print("yo playerPos Y equal to 360")
 			playerVelocityY = -2.5
 			# if playerPosY <= 250:
 			# 	print("playerposy is <= 250")
@@ -92,11 +92,11 @@ while True:
 		playerVelocityX = 0
 
 	#max cords
-	if playerPosY <= 250:
+	if playerPosY <= 500:
 		playerVelocityY = 2.5
-	if playerPosY > 360:
+	if playerPosY > 610:
 		playerVelocityY = 0
-		playerPosY = 360
+		playerPosY = 610
 	#################################################################	
 	#moving player on x axis
 	playerPosX += playerVelocityX
