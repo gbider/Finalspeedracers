@@ -57,7 +57,7 @@ playerVelocityY = 0
 
 # main loop
 time = 0
-shouldIRun = True
+
 while True:
 	events()
 	k = pygame.key.get_pressed()
@@ -74,26 +74,29 @@ while True:
 	# 	playerVelocityY = 2.5
 	# 	print(playerPosY) 
 	elif k[K_SPACE]:
-		if shouldIRun == True:
-			print("running" + str(time))
-			time += 1
-			if playerPosY == 360:
-				print("yo playerPos Y equal to 360")
-				playerVelocityY = -2.5
-			if playerPosY <= 250:
-				print("playerposy is <= 250")
-				playerVelocityY = 2.5
-			if playerPosY > 360:
-				print("stopping")
-				playerVelocityY = 0
-				shouldIRun = False
-				jump = False
-				playerPosY = 360
+		if playerPosY <= 360:
+			print("yo playerPos Y equal to 360")
+			playerVelocityY = -2.5
+			# if playerPosY <= 250:
+			# 	print("playerposy is <= 250")
+			# 	playerVelocityY = 2.5
+			# if playerPosY > 360:
+			# 	print("stopping")
+			# 	playerVelocityY = 0
+			# 	playerPosY = 360
+			# 	shouldIRun = False
 			# else:
 		# 	print("yo im prob screwing up the code")
 		# 	playerVelocityY = 0
 	else:
 		playerVelocityX = 0
+
+	#max cords
+	if playerPosY <= 250:
+		playerVelocityY = 2.5
+	if playerPosY > 360:
+		playerVelocityY = 0
+		playerPosY = 360
 	#################################################################	
 	#moving player on x axis
 	playerPosX += playerVelocityX
