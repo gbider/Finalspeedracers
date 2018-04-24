@@ -3,8 +3,6 @@
 #week 3 Had moving car
 #week 4 Replaced moving car with scrolling background
 
-
-
 #based off of https://youtu.be/AX8YU2hLBUg
 import math, random, sys, os, time
 import pygame
@@ -68,34 +66,12 @@ while True:
 	k = pygame.key.get_pressed()
 	
 	if k[K_RIGHT]:
-		#MOVE RIGHT
-		#shouldIRun = True
-		#jump = True
 		playerVelocityX = 2.5
 	elif k[K_LEFT]:
-		#MOVE LEFT
-		#shouldIRun = True
-		#jump = True
 		playerVelocityX = -2.5
-	# elif k[K_DOWN]:
-	# 	playerVelocityY = 2.5
-	# 	print(playerPosY) 
 	elif k[K_SPACE]:
-		#JUMP
 		if playerPosY <= 610:
-			#print("yo playerPos Y equal to 360")
 			playerVelocityY = -2.5
-			# if playerPosY <= 250:
-			# 	print("playerposy is <= 250")
-			# 	playerVelocityY = 2.5
-			# if playerPosY > 360:
-			# 	print("stopping")
-			# 	playerVelocityY = 0
-			# 	playerPosY = 360
-			# 	shouldIRun = False
-			# else:
-		# 	print("yo im prob screwing up the code")
-		# 	playerVelocityY = 0
 	else:
 		playerVelocityX = 0
 
@@ -105,32 +81,24 @@ while True:
 	if playerPosY > 610:
 		playerVelocityY = 0
 		playerPosY = 610
-	#################################################################	
+
+	
 	#moving player on x axis
 	playerPosX += playerVelocityX
 
 	circlePosX = startScrollingPosX
 	stagePosX += -playerVelocityX
 
-	#should move player on Y axis
-	#dont do nothing
+	#moves player on Y axis and influences jumping
 	playerPosY += playerVelocityY
-
 	circlePosY = startScrollingPosY
-	stagePosY += -playerVelocityY
-	###############################################################
+
 	#moves x cord of screen
 	rel_x = stagePosX % bgWidth
 	DS.blit(bg, (rel_x - bgWidth, 0))
 	if rel_x < W:
 		DS.blit(bg, (rel_x, 0))
 	
-	# rel_y = stagePosY % bgHeight
-	# DS.blit(bg, (rel_y + bgHeight, 0))
-	# if rel_y > H:
-	# 	DS.blit(bg, (rel_y, 0))
-
-
 	#draw circle
 	pygame.draw.circle(DS, WHITE, (int(circlePosX), int(playerPosY - 25)), int(circleRadius), 0)
 
