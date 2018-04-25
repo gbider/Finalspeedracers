@@ -30,8 +30,9 @@ FPS = 500
 # define some colors
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
+BROWN = (139, 69, 19)
 
-bg = pygame.image.load("mario.png").convert()
+bg = pygame.image.load("black.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 
 #creating stage
@@ -58,7 +59,7 @@ playerVelocityY = 0
 
 # main loop
 time = 0
-
+factor = 0
 while True:
 	#check if close game
 	events()
@@ -82,6 +83,7 @@ while True:
 		playerVelocityY = 0
 		playerPosY = 610
 
+
 	
 	#moving player on x axis
 	playerPosX += playerVelocityX
@@ -101,7 +103,18 @@ while True:
 	
 	#draw circle
 	pygame.draw.circle(DS, WHITE, (int(circlePosX), int(playerPosY - 25)), int(circleRadius), 0)
+	
+	#Rectangle coord assigning
+	factor += 1
+	rect1PosX = 1280 - factor
+	rect1PosY = 410
 
+	#check if redraw needed
+	if rect1PosX < -50:
+		factor = 0
+	#draw rectangle
+	#pygame.draw.rect(screen, color, (x,y,width,height), thickness)
+	pygame.draw.rect(DS, BROWN, (rect1PosX, rect1PosY, 100, 50), 0)
 	#update screen
 	pygame.display.update()
 	CLOCK.tick(FPS)
