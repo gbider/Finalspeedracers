@@ -32,7 +32,7 @@ BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 BROWN = (139, 69, 19)
 
-bg = pygame.image.load("black.png").convert()
+bg = pygame.image.load("mainBack.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 
 #creating stage
@@ -73,6 +73,8 @@ while True:
 	elif k[K_SPACE]:
 		if playerPosY <= 610:
 			playerVelocityY = -2.5
+	elif k[K_d]:
+		print(str(playerPosX) + ", " + str(playerPosY))
 	else:
 		playerVelocityX = 0
 
