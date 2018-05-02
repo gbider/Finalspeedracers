@@ -7,6 +7,8 @@
 import math, random, sys, os, time
 import pygame
 from pygame.locals import *
+from collision import *
+
 
 # exit the program
 def events():
@@ -24,7 +26,7 @@ AREA = W * H
 pygame.init()
 CLOCK = pygame.time.Clock()
 DS = pygame.display.set_mode((W, H))
-pygame.display.set_caption("code.Pylet - Scrolling Background with Player")
+pygame.display.set_caption("Speed Racer")
 FPS = 500
 
 # define some colors
@@ -35,6 +37,11 @@ BROWN = (139, 69, 19)
 bg = pygame.image.load("mainBack.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 
+#character
+#char = pygame.image.load("character.png").convert_alpha()
+
+
+      
 #creating stage
 stageWidth = bgWidth * 2
 stagePosX = 0
@@ -56,6 +63,14 @@ playerPosY = 600
 playerVelocityX = 0
 playerVelocityY = 0
 ###################
+
+         
+
+#COLLISION
+def intersect():
+    if (playerPosY < 550 and  playerPosY >= rect1PosX - 50) and (playerPosY < 550 and playerPosY <= rect1PosX + 50):      
+        print("The Circle's height is " + str(playerPosY) + " and the rectangle is at " + str(rect1PosX))
+        return True 
 
 # main loop
 time = 0
@@ -84,8 +99,6 @@ while True:
 	if playerPosY > 610:
 		playerVelocityY = 0
 		playerPosY = 610
-
-
 	
 	#moving player on x axis
 	playerPosX += playerVelocityX
@@ -117,10 +130,18 @@ while True:
 	#draw rectangle
 	#pygame.draw.rect(screen, color, (x,y,width,height), thickness)
 	pygame.draw.rect(DS, BROWN, (rect1PosX, rect1PosY, 100, 50), 0)
+	
+	#collision checking
+	intersect()
+	if intersect() == True:
+		print("YOU SCORED A POINT")
+
+	#load character
+	#DS.blit(char,(25,600))
+
 	#update screen
 	pygame.display.update()
 	CLOCK.tick(FPS)
 	DS.fill(BLACK)
-
 ############
 
