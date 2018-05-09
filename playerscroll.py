@@ -42,14 +42,10 @@ BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 BROWN = (139, 69, 19)
 
+#define background
 bg = pygame.image.load("mainBack.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
-
-#character
-#char = pygame.image.load("character.png").convert_alpha()
-
-
-      
+     
 #creating stage
 stageWidth = bgWidth * 2
 stagePosX = 0
@@ -74,9 +70,9 @@ playerVelocityY = 0
 
 pass_limit = 5
 
-#COLLISION
+#COLLISION function
 def intersect():
-    if (playerPosY < 550 and  playerPosY >= rect1PosX - 50) and (playerPosY < 550 and playerPosY <= rect1PosX + 50):      
+    if (playerPosY < 505 and  playerPosY >= rect1PosX - 100) and (playerPosY < 505 and playerPosY <= rect1PosX):      
         #print("The Circle's height is " + str(playerPosY) + " and the rectangle is at " + str(rect1PosX))
         return True
     else:
@@ -86,24 +82,18 @@ def intersect():
 playing = True
 
 while playing:
-	#check if close game
+	#check if you want to close the game byt he esc button
 	events()
 	#short hand to call key presses
 	k = pygame.key.get_pressed()
-	
-	# if k[K_RIGHT]:
-	# 	playerVelocityX = 2.5
-	# elif k[K_LEFT]:
-	# 	playerVelocityX = -2.5
-	# else:
-	# 	playerVelocityX = 0
-
 	if k[K_SPACE]:
 		if playerPosY <= 610:
 			playerVelocityY = -2.5
 	elif k[K_d]:
-		print(str(playerPosX) + ", " + str(playerPosY))
+		print("The circle is at"+ str(playerPosX) + ", " + str(playerPosY))
+		print("The rectangle is at" + str(rect1PosX) + ", " + str(rect1PosY))
 
+	#sets how the circle moves based on the speed, essentially just the speed of circle
 	playerVelocityX = speed
 
 	#max cords to limit and control jumping
@@ -115,7 +105,6 @@ while playing:
 	
 	#moving player on x axis		
 	playerPosX += playerVelocityX
-
 	circlePosX = startScrollingPosX
 	stagePosX += -playerVelocityX
 
@@ -123,60 +112,44 @@ while playing:
 	playerPosY += playerVelocityY
 	circlePosY = startScrollingPosY
 
-	#moves x cord of screen
+	#moves x cord of screen and works with the looping background
 	rel_x = stagePosX % bgWidth
 	DS.blit(bg, (rel_x - bgWidth, 0))
 	if rel_x < W:
 		DS.blit(bg, (rel_x, 0))
 	
-	#draw circle
+	#draw the circle
 	pygame.draw.circle(DS, WHITE, (int(circlePosX), int(playerPosY - 25)), int(circleRadius), 0)
 	
-	#Rectangle coord assigning
+	#Sets the coords of the rectangle and the speed at which they change based of factor
 	factor += (speed + 0.5)
 	rect1PosX = 1280 - factor
 	rect1PosY = 410
-
-
-
 	
 	#draw rectangle
-	#pygame.draw.rect(screen, color, (x,y,width,height), thickness)
+	#formula for drawing rect: pygame.draw.rect(screen, color, (x,y,width,height), thickness)
 	pygame.draw.rect(DS, BROWN, (rect1PosX, rect1PosY, 100, 50), 0)
 	
-	#collision checking
+	#collision checking and score setting
 	intersect()
 	if intersect() == True:
-		print("YOU SCORED A POINT")
 		score += 1
 		prevScore = score
 		print("Your score is " + str(score))
-	#elif intersect() == False:
-	
-	#if rect1PosX > 500:
-		#shouldI = 1
-	#if rect1PosX < 450 and shouldI == 0:
-		#print("Loss")
 
 	if rect1PosX < 450 and prevScore != score:
 		playing = False
 		message_display("YOU LOSE")
 
-	#check if redraw needed
+	#check if redraw of rectangle is needed
 	if rect1PosX < -50:
 		factor = 0
 		gameRound += 1
 		prevScore = (score + 5)
-	
 
-
-
+	#makes the game get faster 
 	speed += 0.001
 	
-
-	#load character
-	#DS.blit(char,(25,600))
-
 	#update screen
 	pygame.display.update()
 	CLOCK.tick(FPS)

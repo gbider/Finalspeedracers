@@ -8,7 +8,7 @@ display_width = 1280
 display_height = 720
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('A bit Racey')
+pygame.display.set_caption("YOU LOST")
 clock = pygame.time.Clock()
 
 
