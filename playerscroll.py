@@ -144,8 +144,9 @@ while playing:
 		print("Your score is " + str(score))
 		#setScore()
 	#sets the score in the top left
-	###THE BELOW CODE IS TRIP TRUMAN'S
-	#####I got this code from stack overflow
+
+
+	##### got this code from stack overflow
 
 	### i have been searching for LITERALLY DAYS on how to get surf to work
 	####after realizing that surf was a library, i tried to figure out how to import it
@@ -158,7 +159,7 @@ while playing:
 
     ##this is satisfying as hell
 
-	######################THIS ENDS TRIP'S CODE####################
+
 	if rect1PosX < 450 and prevScore != score:
 		playing = False
 		message_display("YOU LOSE")
